@@ -1,3 +1,4 @@
+// jshint esversion:6
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
@@ -6,16 +7,20 @@ import RepoList from './components/RepoList.jsx';
 
 class App extends React.Component {
   constructor(props) {
-    super(props);
+    super(props); 
     this.state = { 
       repos: []
-    }
+    };
 
   }
 
   search (term) {
     console.log(`${term} was searched`);
-    // TODO
+    // send post request to /repos
+    $.post({
+      url: '/repos',
+      dataType: 'application/json'
+    });
   }
 
   render () {
