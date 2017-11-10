@@ -1,6 +1,7 @@
 // jshint esversion:6
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/fetcher');
+mongoose.Promise = global.Promise;
 
 let repoSchema = mongoose.Schema({
   id: Number,
@@ -37,4 +38,18 @@ let save = (repo) => {
       });
 };
 
+let find = () => {
+  console.log('Finding top 25 repos');
+  return Repo.find().sort({forkCount: -1}).limit(25)
+      .then((repos) => {
+        console.log('Top 25 repos found');
+        return repos;
+      })
+      .catch(() => {
+        console.log('repos not found');
+      });
+};
+
+
 module.exports.save = save;
+module.exports.find = find;
