@@ -17,9 +17,16 @@ class App extends React.Component {
   search (term) {
     console.log(`${term} was searched`);
     // send post request to /repos
-    $.post({
-      url: '/repos',
-      dataType: 'application/json'
+    
+    fetch('/repos', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: term
+      })
     });
   }
 
